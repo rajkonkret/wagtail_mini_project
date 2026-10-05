@@ -50,6 +50,7 @@ EXPOSE 8000
 # 3. Add the virtual environment to PATH.
 ENV PYTHONUNBUFFERED=1 \
     PORT=8000 \
+    PYTHONPATH="/app/company_site" \
     PATH="/opt/venv/bin:$PATH"
 
 
