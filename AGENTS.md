@@ -46,26 +46,38 @@ wagtail_mini_project/
 
 ## Common Development Workflows (Docker-first)
 
-### 1. Build Docker Image
+### 1. Uruchamianie aplikacji za pomocą Docker Compose (Zalecane)
 ```bash
+# Uruchomienie aplikacji w tle
+docker compose up -d
+
+# Podgląd logów aplikacji
+docker compose logs -f
+
+# Zatrzymanie aplikacji
+docker compose down
+```
+
+### 2. Budowanie i uruchamianie obrazu Docker (Bez Compose)
+```bash
+# Budowanie obrazu
 docker build -t wagtail-mini-project .
+
+# Uruchomienie kontenera
+docker run -p 8090:8000 wagtail-mini-project
 ```
 
-### 2. Run Container & Application Server
+### 3. Komendy zarządcze Django w Dockerze
 ```bash
-docker run -p 8000:8000 wagtail-mini-project
-```
+# Sprawdzenie projektu Django
+docker compose run --rm web python manage.py check
 
-### 3. Run Management Commands in Docker
-```bash
-# Run Django check
-docker run --rm wagtail-mini-project python manage.py check
+# Tworzenie i wykonywanie migracji
+docker compose run --rm web python manage.py makemigrations
+docker compose run --rm web python manage.py migrate
 
-# Run migrations
-docker run --rm wagtail-mini-project python manage.py migrate
-
-# Create superuser
-docker run -it --rm wagtail-mini-project python manage.py createsuperuser
+# Tworzenie superużytkownika (Admina)
+docker compose run -it --rm web python manage.py createsuperuser
 ```
 
 ---

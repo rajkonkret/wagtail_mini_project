@@ -4,7 +4,7 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail import blocks
 
-class HomePage(Page):
+class StandardPage(Page):
     body = StreamField([
         ("heading", blocks.CharBlock()),
         ("paragraph", blocks.RichTextBlock()),

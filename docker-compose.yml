@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    container_name: wagtail_mini_project_web
+    ports:
+      - "8090:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PORT=8000
+      - DJANGO_SETTINGS_MODULE=company_site.settings.dev
+    volumes:
+      - ./company_site/db.sqlite3:/app/company_site/db.sqlite3
+    restart: unless-stopped
